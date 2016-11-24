@@ -1,19 +1,21 @@
 #!/bin/bash
 
-COMMAND=$(which eslint)
+set -e
 
 if [ -f ./node_modules/.bin/eslint ]; then
     COMMAND=./node_modules/.bin/eslint
+else
+    echo "No local installation of eslint found, installing eslint... " >&2
+    npm install -g eslint >&2
+    COMMAND=$(which eslint)
 fi
 
-if [ -f /tmp/analysis_result_eslint ]; then
-    rm /tmp/analysis_result_eslint
-fi
+rm -f /tmp/analysis_result_eslint
 
 echo "Running $COMMAND --format checkstyle $@">&2
 
-$COMMAND --debug --color --output-file=/tmp/analysis_result_eslint "$@" >&2
+$COMMAND --debug --color --format checkstyle --output-file=./tmp/analysis_result_eslint "$@" >&2
 
-cat /tmp/analysis_result_eslint
 
-rm /tmp/analysis_result_eslint
+cat ./tmp/analysis_result_eslint
+

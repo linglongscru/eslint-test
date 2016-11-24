@@ -144,9 +144,6 @@
     "standard/array-bracket-even-spacing": [2, "either"],
     "standard/computed-property-even-spacing": [2, "even"],
 
-    "promise/param-names": 2,
-        "promise/always-return": 2,
-        "promise/catch-or-return": 2,
-        "promise/no-native": 0,
+    "promise/param-names": 2
   }
 }
